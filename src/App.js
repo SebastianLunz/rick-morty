@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import PageNavbar from "./components/navbar/PageNavbar";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Routes from "./components/constants/Routes";
+import Characters from "./components/characters/Characters";
+import Locations from "./components/locations/Locations";
+import Episodes from "./components/episodes/Episodes";
+import Favorites from "./components/favorites/Favorites";
+import Dashboard from "./components/dashboard/Dashboard";
+import {Container} from "reactstrap";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <PageNavbar/>
+      <Container>
+        <Switch>
+          <Route path={Routes.CHARACTER} render={() => <Characters/>}/>
+          <Route path={Routes.LOCATION} render={() => <Locations/>}/>
+          <Route path={Routes.EPISODE} render={() => <Episodes/>}/>
+          <Route path={Routes.FAVORITE} render={() => <Favorites/>}/>
+          <Route exact path={Routes.ROOT} render={() => <Dashboard/>}/>
+        </Switch>
+      </Container>
+    </Router>
   );
 }
 

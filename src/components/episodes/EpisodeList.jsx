@@ -16,7 +16,7 @@ function EpisodeList({episodes}) {
       <tbody>
       {
         episodes.map(episode => (
-          <tr>
+          <tr key={episode.id}>
             <td>{episode.id}</td>
             <td>{episode.episode}</td>
             <td>{episode.name}</td>
