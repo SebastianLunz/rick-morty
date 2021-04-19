@@ -4,15 +4,13 @@ import getRepository from "../shared/GetRepository";
 import CharacterList from "./CharacterList";
 import PaginationLink from "../shared/PaginationLink";
 import {Col, Row} from "reactstrap";
-import {setFavorite, amountOfAddedToFavorites} from "../favorites/FavoriteStorage";
+import {setFavorite, getFavorite} from "../favorites/FavoriteStorage";
 
 
 function Characters() {
   const repository = "character";
   const repositoryUrl = window.location.href;
   const suffixUrl = getRepository(repositoryUrl);
-
-  const [data, setData] = useState([]);
 
   const {
     data: characters,
@@ -22,12 +20,17 @@ function Characters() {
     numberOfPages
   } = UseFetch(`https://rickandmortyapi.com/api/character${suffixUrl}`);
 
+  const [addedToFavorite, setAddedToFavorite] = useState(() => {
+    const favorites = getFavorite();
+    return favorites.map(favorite => favorite.id);
+  });
+
   function handleAddToFavoriteClick(character) {
     setFavorite(character);
-    setData(amountAdded);
+    const updatedAddedToFavorite = [...addedToFavorite];
+    updatedAddedToFavorite.push(character.id);
+    setAddedToFavorite(updatedAddedToFavorite);
   }
-
-  const amountAdded = amountOfAddedToFavorites();
 
   return (
     <>
@@ -53,7 +56,7 @@ function Characters() {
         <CharacterList
           characters={characters}
           handleAddToFavoriteClick={handleAddToFavoriteClick}
-          amountAdded={amountAdded}
+          addedToFavorite={addedToFavorite}
         />
       }
       <PaginationLink numberOfPages={numberOfPages}/>

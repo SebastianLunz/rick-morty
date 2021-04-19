@@ -3,7 +3,7 @@ import {Table} from 'reactstrap';
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function CharacterList({characters, handleAddToFavoriteClick, amountAdded}) {
+function CharacterList({characters, handleAddToFavoriteClick, addedToFavorite}) {
 
   return (
     <Table hover striped responsive>
@@ -36,7 +36,7 @@ function CharacterList({characters, handleAddToFavoriteClick, amountAdded}) {
             </td>
             <td style={{textAlign: "center"}}>
               <FontAwesomeIcon
-                style={amountAdded.includes(character.id)
+                style={addedToFavorite.includes(character.id)
                   ? {color: "green"}
                   : {color: "#cecece", fontSize: "12px"}
                 }

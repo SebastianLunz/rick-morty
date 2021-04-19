@@ -3,8 +3,8 @@ const setFavorite = (favorite) => {
 
   if ((favoriteContainer.filter(item => item.id === favorite.id)).length === 0) {
     favoriteContainer.push(favorite);
+    localStorage.setItem("favoriteContainer", JSON.stringify(favoriteContainer));
   }
-  localStorage.setItem("favoriteContainer", JSON.stringify(favoriteContainer));
 }
 
 
@@ -12,13 +12,6 @@ const getFavorite = () => {
   let favorites = JSON.parse(localStorage.getItem("favoriteContainer")) || [];
   return favorites;
 }
-
-
-const amountOfAddedToFavorites = () => {
-  const favorites = getFavorite();
-  const favoritesID = favorites.map(favorite => favorite.id);
-  return favoritesID;
-};
 
 
 const removeFavorite = (id) => {
@@ -30,11 +23,11 @@ const removeFavorite = (id) => {
     favoriteContainer.splice(favoriteToRemove, 1);
     localStorage.setItem("favoriteContainer", JSON.stringify(favoriteContainer));
   }
+  return favoriteContainer;
 }
 
 export {
   setFavorite,
   getFavorite,
-  amountOfAddedToFavorites,
   removeFavorite,
 };
