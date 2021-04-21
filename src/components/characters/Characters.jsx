@@ -27,9 +27,7 @@ function Characters() {
 
   function handleAddToFavoriteClick(character) {
     setFavorite(character);
-    const updatedAddedToFavorite = [...addedToFavorite];
-    updatedAddedToFavorite.push(character.id);
-    setAddedToFavorite(updatedAddedToFavorite);
+    setAddedToFavorite([...addedToFavorite, character.id]);
   }
 
   return (
